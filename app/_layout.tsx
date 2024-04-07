@@ -56,11 +56,13 @@ function RootLayoutNav() {
           <Stack.Screen
             name="(modals)/booking"
             options={{
-              headerTitleStyle: {
-                fontFamily: "lato",
-              },
-              headerTitle: "Create a Booking",
-              headerTitleAlign: "center",
+              // headerTitleStyle: {
+              //   fontFamily: "lato",
+              // },
+              // headerTitle: "Create a Booking",
+              // headerTitleAlign: "center",
+              headerTransparent: true,
+              presentation: "transparentModal",
             }}
           />
         </Stack>

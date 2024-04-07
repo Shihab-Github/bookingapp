@@ -1,10 +1,9 @@
 import { View, Text } from "react-native";
 
-export default function Page() {
+export default function Listings() {
   return (
-    
     <View>
-      <Text>Reserve</Text>
+      <Text>Listings</Text>
     </View>
   );
 }
