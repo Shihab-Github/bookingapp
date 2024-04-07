@@ -4,11 +4,14 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 
 import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
 } from "expo-router";
+
+const queryClient = new QueryClient();
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
@@ -46,14 +49,22 @@ export default function RootLayout() {
 function RootLayoutNav() {
   return (
     <ThemeProvider value={DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="listing/[id]" options={{ headerTitle: "" }} />
-        <Stack.Screen
-          name="(modals)/booking"
-          options={{ headerTitle: "", presentation: "transparentModal" }}
-        />
-      </Stack>
+      <QueryClientProvider client={queryClient}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="listing/[id]" options={{ headerTitle: "" }} />
+          <Stack.Screen
+            name="(modals)/booking"
+            options={{
+              headerTitleStyle: {
+                fontFamily: "lato",
+              },
+              headerTitle: "Create a Booking",
+              headerTitleAlign: "center",
+            }}
+          />
+        </Stack>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }

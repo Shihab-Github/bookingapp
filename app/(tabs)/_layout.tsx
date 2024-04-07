@@ -18,6 +18,9 @@ export default function Layout() {
         options={{
           title: "Properties",
           headerTitleAlign: "center",
+          headerTitleStyle: {
+            fontFamily: "lato",
+          },
           tabBarLabel: "Bookings",
           tabBarIcon: ({ color, size }) => {
             return <Ionicons name="search" color={color} size={size} />;
@@ -30,6 +33,9 @@ export default function Layout() {
           title: "My Reservations",
           headerTitleAlign: "center",
           tabBarLabel: "Reservations",
+          headerTitleStyle: {
+            fontFamily: "lato",
+          },
           tabBarIcon: ({ color, size }) => {
             return <Ionicons name="calendar" color={color} size={size} />;
           },
