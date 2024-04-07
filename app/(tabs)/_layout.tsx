@@ -40,6 +40,9 @@ export default function Layout() {
         options={{
           title: "Account",
           headerTitleAlign: "center",
+          headerTitleStyle: {
+            fontFamily: "lato",
+          },
           tabBarLabel: "Profile",
           tabBarIcon: ({ color, size }) => {
             return (

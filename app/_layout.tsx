@@ -48,6 +48,11 @@ function RootLayoutNav() {
     <ThemeProvider value={DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="listing/[id]" options={{ headerTitle: "" }} />
+        <Stack.Screen
+          name="(modals)/booking"
+          options={{ headerTitle: "", presentation: "transparentModal" }}
+        />
       </Stack>
     </ThemeProvider>
   );
