@@ -5,6 +5,7 @@ import { getListings } from "@/data-layer/listings";
 import { Listing } from "@/interface/Listing";
 import ListinSkeleton from "@/ui/ListingSkeleton";
 import ListingItem from "../ListingItem";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 interface Props {
   category: string;
@@ -26,7 +27,9 @@ export default function Listings({ category }: Props) {
   if (isLoading) {
     return (
       <>
-        <ListinSkeleton />
+        <SafeAreaView>
+          <ListinSkeleton />
+        </SafeAreaView>
       </>
     );
   }

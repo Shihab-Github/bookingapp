@@ -1,10 +1,8 @@
 import { Listing } from "@/interface/Listing";
-import { Link } from "expo-router";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import BaseText from "@/ui/BaseText";
-import Animated, { FadeInLeft, FadeInRight } from "react-native-reanimated";
 
 export default function ListingItem({ data }: { data: Listing }) {
   const navigate = () => {
