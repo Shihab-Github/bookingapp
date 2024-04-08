@@ -2,6 +2,7 @@ import { categories } from "@/constants/Categories";
 import Colors from "@/constants/Colors";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Link } from "expo-router";
+import { useRef, useState } from "react";
 import {
   View,
   Text,
@@ -9,13 +10,30 @@ import {
   Pressable,
   FlatList,
   Image,
+  PressableProps,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import * as Haptics from "expo-haptics";
 
-const img: string =
-  "https://th.bing.com/th/id/OIP.Siwme3tV4WFDWGY03DAs1gHaHa?w=216&h=216&c=7&r=0&o=5&pid=1.7";
+interface ListingCategoryProps {
+  onCategoryChanged: (category: string) => void;
+}
 
-export default function ListingCategories() {
+export default function ListingCategories({
+  onCategoryChanged,
+}: ListingCategoryProps) {
+  const scrollRef = useRef<FlatList>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const selectCategory = (index: number) => {
+    setActiveIndex(index);
+
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+    scrollRef.current?.scrollToIndex({ index });
+
+    onCategoryChanged(categories[index].name);
+  };
+
   return (
     <SafeAreaView style={{ backgroundColor: "#fff" }}>
       <View style={styles.container}>
@@ -40,19 +58,35 @@ export default function ListingCategories() {
         </View>
 
         <FlatList
+          ref={scrollRef}
           horizontal
           showsHorizontalScrollIndicator={true}
           data={categories}
           contentContainerStyle={{
             alignItems: "center",
-            gap: 20,
+            gap: 30,
             paddingHorizontal: 16,
           }}
           renderItem={({ item, index }) => {
             return (
-              <Pressable>
+              <Pressable
+                style={
+                  activeIndex === index
+                    ? styles.categoriesBtnActive
+                    : styles.categoriesBtn
+                }
+                onPress={(e) => selectCategory(index)}
+              >
                 <MaterialIcons size={24} name={item.icon as any} />
-                <Text>{item.name}</Text>
+                <Text
+                  style={
+                    activeIndex === index
+                      ? styles.categoryTextActive
+                      : styles.categoryText
+                  }
+                >
+                  {item.name}
+                </Text>
               </Pressable>
             );
           }}
@@ -99,5 +133,27 @@ const styles = StyleSheet.create({
     },
     padding: 14,
     borderRadius: 30,
+  },
+  categoryText: {
+    fontSize: 14,
+    fontFamily: "lato",
+    color: Colors.grey,
+  },
+  categoryTextActive: {
+    fontSize: 14,
+    fontFamily: "lato-b",
+    color: Colors.dark,
+  },
+  categoriesBtn: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: 0,
+  },
+  categoriesBtnActive: {
+    alignItems: "center",
+    justifyContent: "center",
+    borderBottomColor: "#000",
+    borderBottomWidth: 2,
+    paddingBottom: 0,
   },
 });
