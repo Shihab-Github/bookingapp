@@ -1,8 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { useLocalSearchParams } from "expo-router";
-import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Image,
+  Pressable,
+} from "react-native";
 import { getListingById } from "@/data-layer/listings";
-import Animated from "react-native-reanimated";
+import Animated, { SlideInDown } from "react-native-reanimated";
 import ListinSkeleton from "@/ui/ListingSkeleton";
 import Colors from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
@@ -28,7 +35,7 @@ export default function Page() {
 
   return (
     <View style={styles.container}>
-      <Animated.ScrollView>
+      <Animated.ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
         <Animated.Image
           style={styles.image}
           source={{ uri: listing.xl_picture_url }}
@@ -71,6 +78,28 @@ export default function Page() {
           <BaseText variant="description">{listing.description}</BaseText>
         </View>
       </Animated.ScrollView>
+
+      <Animated.View style={styles.footer} entering={SlideInDown.delay(200)}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <View>
+            <BaseText variant="bold">
+              ${listing.price} / <BaseText>night</BaseText>
+            </BaseText>
+          </View>
+
+          <View>
+            <Pressable style={styles.reserveBtn}>
+              <Text style={styles.reserveBtnText}>Reserve</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Animated.View>
     </View>
   );
 }
@@ -103,5 +132,31 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
+  },
+  footer: {
+    position: "absolute",
+    height: 80,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "#fff",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderTopColor: Colors.grey,
+    borderTopWidth: StyleSheet.hairlineWidth,
+  },
+
+  reserveBtn: {
+    backgroundColor: Colors.primary,
+    height: 50,
+    borderRadius: 8,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 20,
+  },
+  reserveBtnText: {
+    color: "#fff",
+    fontSize: 16,
+    fontFamily: "lato-b",
   },
 });
