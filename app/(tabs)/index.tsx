@@ -1,16 +1,18 @@
+import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import ListingCategories from "@/components/ListingCategories";
 import Listings from "@/components/Listings";
 import { Stack } from "expo-router";
-import { Link } from "expo-router";
-import { useState } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 
 export default function Page() {
+  const queryClient = useQueryClient();
   const [category, setCategory] = useState("Tiny Homes");
 
   const getListingsByCategory = (category: string) => {
     console.log("CHANGED: ", category);
     setCategory(category);
+    queryClient.invalidateQueries({ queryKey: ["listingsData"] });
   };
 
   return (
@@ -22,7 +24,7 @@ export default function Page() {
           ),
         }}
       />
-      <Listings listing={[]} category={category} />
+      <Listings category={category} />
       {/* <Text>Bookings</Text>
       <Link href={"/(modals)/booking"}>Reserve</Link>
       <Link href={"/listing/545Sdae"}>Listing detail</Link> */}
