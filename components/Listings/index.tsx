@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, FlatList, ListRenderItem } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import { getListings } from "@/data-layer/listings";
 import { Listing } from "@/interface/Listing";
-import { Link } from "expo-router";
+import ListinSkeleton from "@/ui/ListingSkeleton";
 import ListingItem from "../ListingItem";
 
 interface Props {
@@ -23,11 +23,17 @@ export default function Listings({ category }: Props) {
     },
   });
 
+  if (isLoading) {
+    return (
+      <>
+        <ListinSkeleton />
+      </>
+    );
+  }
+
   const renderItem: ListRenderItem<Listing> = ({ item }) => (
     <ListingItem data={item} />
   );
-
-  console.log("len: ", listings?.length);
 
   return (
     <View style={styles.container}>
