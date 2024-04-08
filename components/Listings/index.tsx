@@ -27,6 +27,8 @@ export default function Listings({ category }: Props) {
     <ListingItem data={item} />
   );
 
+  console.log("len: ", listings?.length);
+
   return (
     <View style={styles.container}>
       <FlatList data={listings} ref={listRef} renderItem={renderItem} />
