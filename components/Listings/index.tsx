@@ -23,8 +23,6 @@ export default function Listings({ category }: Props) {
     },
   });
 
-  console.log(listings?.length);
-
   const renderItem: ListRenderItem<Listing> = ({ item }) => (
     <ListingItem data={item} />
   );
