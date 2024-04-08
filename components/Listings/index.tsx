@@ -1,13 +1,19 @@
-import { View, Text, StyleSheet } from "react-native";
+import { useRef } from "react";
+import { View, Text, StyleSheet, FlatList, ListRenderItem } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import { getListings } from "@/data-layer/listings";
+import { Listing } from "@/interface/Listing";
+import { Link } from "expo-router";
+import ListingItem from "../ListingItem";
 
 interface Props {
   category: string;
 }
 
 export default function Listings({ category }: Props) {
-  const { data: listings } = useQuery({
+  const listRef = useRef<FlatList>(null);
+
+  const { isLoading, data: listings } = useQuery({
     queryKey: ["listingsData", category],
     queryFn: () => {
       console.log("selected category: ", category);
@@ -19,9 +25,13 @@ export default function Listings({ category }: Props) {
 
   console.log(listings?.length);
 
+  const renderItem: ListRenderItem<Listing> = ({ item }) => (
+    <ListingItem data={item} />
+  );
+
   return (
     <View style={styles.container}>
-      <Text>Listings</Text>
+      <FlatList data={listings} ref={listRef} renderItem={renderItem} />
     </View>
   );
 }
@@ -29,5 +39,7 @@ export default function Listings({ category }: Props) {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    flex: 1,
+    backgroundColor: "#FDFFFF",
   },
 });
