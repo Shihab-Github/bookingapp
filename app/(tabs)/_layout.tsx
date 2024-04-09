@@ -1,7 +1,6 @@
 import Colors from "@/constants/Colors";
 import { Tabs } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 export default function Layout() {
   return (

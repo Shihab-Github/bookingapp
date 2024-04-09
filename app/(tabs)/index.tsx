@@ -25,9 +25,6 @@ export default function Page() {
         }}
       />
       <Listings category={category} />
-      {/* <Text>Bookings</Text>
-      <Link href={"/(modals)/booking"}>Reserve</Link>
-      <Link href={"/listing/545Sdae"}>Listing detail</Link> */}
     </View>
   );
 }

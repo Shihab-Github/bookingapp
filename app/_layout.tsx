@@ -59,13 +59,19 @@ function RootLayoutNav() {
           <Stack.Screen
             name="(modals)/booking"
             options={{
-              // headerTitleStyle: {
-              //   fontFamily: "lato",
-              // },
-              // headerTitle: "Create a Booking",
-              // headerTitleAlign: "center",
-              headerTransparent: true,
-              presentation: "transparentModal",
+              headerTitleStyle: {
+                fontFamily: "lato",
+              },
+              headerTitle: "Request to book",
+            }}
+          />
+          <Stack.Screen
+            name="reservation/[id]"
+            options={{
+              headerTitleStyle: {
+                fontFamily: "lato",
+              },
+              headerTitle: "Request to book",
             }}
           />
         </Stack>

@@ -14,6 +14,7 @@ import ListinSkeleton from "@/ui/ListingSkeleton";
 import Colors from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import BaseText from "@/ui/BaseText";
+import { router } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
@@ -28,6 +29,10 @@ export default function Page() {
       });
     },
   });
+
+  const navigate = () => {
+    router.push(`/reservation/${id}`);
+  };
 
   if (isLoading || !listing) {
     return <ListinSkeleton />;
@@ -94,7 +99,7 @@ export default function Page() {
           </View>
 
           <View>
-            <Pressable style={styles.reserveBtn}>
+            <Pressable style={styles.reserveBtn} onPress={navigate}>
               <Text style={styles.reserveBtnText}>Reserve</Text>
             </Pressable>
           </View>
