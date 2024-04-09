@@ -1,23 +1,28 @@
 import React, { useMemo, useState } from "react";
 import { Text, View, StyleSheet, Pressable } from "react-native";
-import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+import BottomSheet, {
+  BottomSheetView,
+  BottomSheetFooter,
+} from "@gorhom/bottom-sheet";
 import Colors from "@/constants/Colors";
 import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
 import { Ionicons } from "@expo/vector-icons";
 import DateTimePicker, { DateType } from "react-native-ui-datepicker";
+import { IRange } from "@/interface/common";
+import { defaultStyles } from "@/styles";
 
-interface Props {
+interface IProps {
   sheetRef: React.RefObject<BottomSheetMethods>;
-  close: () => void;
+  close: (range: IRange) => void;
 }
 
-export default function DatePickerBottomSheet(props: Props) {
+export default function DatePickerBottomSheet(props: IProps) {
   const { sheetRef, close } = props;
 
-  const [range, setRange] = useState<{
-    startDate: DateType;
-    endDate: DateType;
-  }>({ startDate: undefined, endDate: undefined });
+  const [range, setRange] = useState<IRange>({
+    startDate: undefined,
+    endDate: undefined,
+  });
 
   const snapPoints = useMemo(() => {
     return ["50%", "90%"];
@@ -25,6 +30,17 @@ export default function DatePickerBottomSheet(props: Props) {
 
   const onChange = (params: any) => {
     setRange(params);
+  };
+
+  const onClose = () => {
+    close(range);
+  };
+
+  const onClear = () => {
+    setRange({
+      startDate: undefined,
+      endDate: undefined,
+    });
   };
 
   return (
@@ -37,7 +53,7 @@ export default function DatePickerBottomSheet(props: Props) {
     >
       <>
         <BottomSheetView style={styles.header}>
-          <Pressable onPress={close}>
+          <Pressable onPress={onClose}>
             <Ionicons name="close" size={25} />
           </Pressable>
 
@@ -60,6 +76,21 @@ export default function DatePickerBottomSheet(props: Props) {
             onChange={onChange}
           />
         </BottomSheetView>
+        <View style={styles.divider} />
+        <BottomSheetView style={styles.footer}>
+          <View>
+            <Pressable style={defaultStyles.secondaryBtn} onPress={onClear}>
+              <Text style={defaultStyles.secondaryBtnText}>Clear</Text>
+            </Pressable>
+          </View>
+          <View>
+            <Pressable style={defaultStyles.primaryBtn}>
+              <Text style={defaultStyles.primaryBtnText} onPress={onClose}>
+                Save
+              </Text>
+            </Pressable>
+          </View>
+        </BottomSheetView>
       </>
     </BottomSheet>
   );
@@ -71,6 +102,7 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 16,
+    flex: 1,
   },
   header: {
     flexDirection: "row",
@@ -83,5 +115,11 @@ const styles = StyleSheet.create({
     width: "100%",
     height: StyleSheet.hairlineWidth,
     backgroundColor: "#CECECE",
+  },
+  footer: {
+    padding: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });

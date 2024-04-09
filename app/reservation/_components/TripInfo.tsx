@@ -1,55 +1,44 @@
 import { View, Pressable, Text, StyleSheet } from "react-native";
+import { DateType } from "react-native-ui-datepicker";
+import dayjs from "dayjs";
+import { defaultStyles } from "@/styles";
 
-interface Props {
+interface IProps {
+  startDate?: DateType;
+  endDate?: DateType;
   onDatePickerOpen?: () => void;
 }
 
-export default function TripInfo(props: Props) {
-  const { onDatePickerOpen } = props;
+export default function TripInfo(props: IProps) {
+  const { onDatePickerOpen, startDate, endDate } = props;
 
   return (
     <>
-      <View style={styles.info}>
-        <Text
-          style={[
-            styles.defaultTextStyle,
-            { fontSize: 20, fontWeight: "bold" },
-          ]}
-        >
-          Your Trip
-        </Text>
+      <View style={defaultStyles.infoContainer}>
+        <Text style={defaultStyles.infoMainHeader}>Your Trip</Text>
       </View>
       <View style={[styles.info, { paddingTop: 8 }]}>
         <View style={styles.tripDate}>
           <View>
-            <Text
-              style={[
-                styles.defaultTextStyle,
-                { fontSize: 18, fontWeight: "bold" },
-              ]}
-            >
-              Date
-            </Text>
-            <Text
-              style={[styles.defaultTextStyle, { fontSize: 18, paddingTop: 8 }]}
-            >
-              April 9 - 11
-            </Text>
+            <Text style={defaultStyles.infoSubHeader}>Date</Text>
+            {startDate && endDate ? (
+              <Text
+                style={[defaultStyles.infoSubHeader, { paddingVertical: 8 }]}
+              >
+                {dayjs(startDate).format("MMMM/DD/YYYY")} -{" "}
+                {dayjs(endDate).format("MMMM/DD/YYYY")}
+              </Text>
+            ) : (
+              <Text
+                style={[defaultStyles.infoSubHeader, { paddingVertical: 8 }]}
+              >
+                N/A
+              </Text>
+            )}
           </View>
           <View>
             <Pressable onPress={onDatePickerOpen}>
-              <Text
-                style={[
-                  styles.defaultTextStyle,
-                  {
-                    fontSize: 18,
-                    fontWeight: "bold",
-                    textDecorationLine: "underline",
-                  },
-                ]}
-              >
-                Edit
-              </Text>
+              <Text style={defaultStyles.secondaryBtnText}>Edit</Text>
             </Pressable>
           </View>
         </View>

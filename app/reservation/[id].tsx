@@ -1,21 +1,27 @@
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { View, StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { getListingById } from "@/data-layer/listings";
 import { ScrollView } from "react-native";
 import ListinSkeleton from "@/ui/ListingSkeleton";
-import { Ionicons } from "@expo/vector-icons";
-import BaseText from "@/ui/BaseText";
 import BottomSheet from "@gorhom/bottom-sheet";
 import DatePickerBottomSheet from "@/components/DatePickerBottomSheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import BasicInfo from "./_components/BasicInfo";
 import TripInfo from "./_components/TripInfo";
+import { IRange } from "@/interface/common";
+import PriceDetails from "./_components/PriceDetails";
+import { defaultStyles } from "@/styles";
 
 export default function Reservation() {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const { id } = useLocalSearchParams<{ id: string }>();
+
+  const [bookingDateRange, setBookingDateRange] = useState<IRange>({
+    startDate: undefined,
+    endDate: undefined,
+  });
 
   const { isLoading, data: listing } = useQuery({
     queryKey: ["listing", id],
@@ -30,8 +36,9 @@ export default function Reservation() {
     bottomSheetRef.current?.snapToIndex(1);
   };
 
-  const onDatePickerClose = () => {
+  const onDatePickerClose = (dateRange: IRange) => {
     bottomSheetRef.current?.close();
+    setBookingDateRange(dateRange);
   };
 
   if (isLoading || !listing) {
@@ -42,16 +49,25 @@ export default function Reservation() {
     <GestureHandlerRootView>
       <ScrollView>
         <BasicInfo listing={listing} />
-        <View style={styles.divider} />
-        <TripInfo onDatePickerOpen={onDatePickerOpen} />
-        <View style={styles.divider} />
-
+        <View style={defaultStyles.infoDivider} />
+        <TripInfo
+          onDatePickerOpen={onDatePickerOpen}
+          startDate={bookingDateRange.startDate}
+          endDate={bookingDateRange.endDate}
+        />
+        <View style={defaultStyles.infoDivider} />
+        <PriceDetails
+          startDate={bookingDateRange.startDate}
+          endDate={bookingDateRange.endDate}
+          price={listing.price}
+        />
+        <View style={defaultStyles.infoDivider} />
         <BasicInfo listing={listing} />
-        <View style={styles.divider} />
+        <View style={defaultStyles.infoDivider} />
         <TripInfo />
-        <View style={styles.divider} />
+        <View style={defaultStyles.infoDivider} />
         <BasicInfo listing={listing} />
-        <View style={styles.divider} />
+        <View style={defaultStyles.infoDivider} />
         <TripInfo />
       </ScrollView>
       <DatePickerBottomSheet
@@ -74,11 +90,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 24,
     gap: 12,
-  },
-
-  divider: {
-    width: "100%",
-    height: 8,
-    backgroundColor: "#CECECE",
   },
 });
