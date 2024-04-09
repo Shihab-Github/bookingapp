@@ -38,7 +38,7 @@ export default function TripInfo(props: IProps) {
           </View>
           <View>
             <Pressable onPress={onDatePickerOpen}>
-              <Text style={defaultStyles.secondaryBtnText}>Edit</Text>
+              <Text style={defaultStyles.secondaryBtnText}>Select Date</Text>
             </Pressable>
           </View>
         </View>

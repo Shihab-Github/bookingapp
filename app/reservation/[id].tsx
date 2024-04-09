@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { View, StyleSheet } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { getListingById } from "@/data-layer/listings";
 import { ScrollView } from "react-native";
@@ -13,10 +13,15 @@ import TripInfo from "./_components/TripInfo";
 import { IRange } from "@/interface/common";
 import PriceDetails from "./_components/PriceDetails";
 import { defaultStyles } from "@/styles";
+import UserInfo from "./_components/UserInfo";
+import Label from "@/ui/Label";
 
 export default function Reservation() {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const { id } = useLocalSearchParams<{ id: string }>();
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLirstName] = useState("");
 
   const [bookingDateRange, setBookingDateRange] = useState<IRange>({
     startDate: undefined,
@@ -62,13 +67,32 @@ export default function Reservation() {
           price={listing.price}
         />
         <View style={defaultStyles.infoDivider} />
-        <BasicInfo listing={listing} />
+        <UserInfo
+          firstName={firstName}
+          lastName={lastName}
+          setFirstName={setFirstName}
+          setLastName={setLirstName}
+        />
         <View style={defaultStyles.infoDivider} />
-        <TripInfo />
-        <View style={defaultStyles.infoDivider} />
-        <BasicInfo listing={listing} />
-        <View style={defaultStyles.infoDivider} />
-        <TripInfo />
+        <View style={defaultStyles.infoContainer}>
+          <Label>
+            By Selecting the button below, I agree to the{" "}
+            <Text style={defaultStyles.rulesText}>Host's House Rules,</Text>
+            <Text style={defaultStyles.rulesText}>
+              Ground Rules for guests
+            </Text>{" "}
+            and{" "}
+            <Text style={defaultStyles.rulesText}>
+              Airbnb's Rebooking and Refund Policy
+            </Text>
+            . And that Airbnb can charge my payment method if I'm responsible
+            for damage
+          </Label>
+
+          <Pressable style={defaultStyles.primaryBtn}>
+            <Text style={defaultStyles.primaryBtnText}>Confirm and Pay</Text>
+          </Pressable>
+        </View>
       </ScrollView>
       <DatePickerBottomSheet
         sheetRef={bottomSheetRef}
@@ -77,18 +101,3 @@ export default function Reservation() {
     </GestureHandlerRootView>
   );
 }
-
-const styles = StyleSheet.create({
-  defaultTextStyle: {
-    fontFamily: "lato",
-  },
-  container: {
-    flex: 1,
-  },
-  info: {
-    flexDirection: "row",
-    paddingHorizontal: 16,
-    paddingVertical: 24,
-    gap: 12,
-  },
-});

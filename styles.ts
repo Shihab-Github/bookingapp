@@ -56,7 +56,17 @@ export const defaultStyles = StyleSheet.create({
     },
     infoDivider: {
         width: "100%",
-        height: 8,
+        height: 4,
         backgroundColor: "#CECECE",
     },
+    textField: {
+        height: 40,
+        borderRadius: 4,
+        borderWidth: 1,
+        padding: 10,
+    },
+    rulesText: {
+        textDecorationLine: "underline", 
+        fontWeight: "bold" 
+    }
 })
