@@ -1013,7 +1013,7 @@
                 "Hair Dryer"
             ],
             "square_feet": null,
-            "price": null,
+            "price": 650,
             "weekly_price": null,
             "monthly_price": null,
             "security_deposit": null,
@@ -1852,7 +1852,7 @@
                 "Laptop Friendly Workspace"
             ],
             "square_feet": null,
-            "price": null,
+            "price": 97,
             "weekly_price": null,
             "monthly_price": null,
             "security_deposit": null,
@@ -1975,7 +1975,7 @@
                 "Laptop Friendly Workspace"
             ],
             "square_feet": null,
-            "price": null,
+            "price": 119,
             "weekly_price": null,
             "monthly_price": 29002,
             "security_deposit": null,
@@ -2103,7 +2103,7 @@
                 "Laptop Friendly Workspace"
             ],
             "square_feet": null,
-            "price": null,
+            "price": 300,
             "weekly_price": null,
             "monthly_price": null,
             "security_deposit": null,
