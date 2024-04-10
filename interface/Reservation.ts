@@ -25,6 +25,6 @@ export interface IReservation {
     lastName?: string;
     startDate?: string;
     endDate?: string;
-    depositPad?: Boolean;
+    security_deposit?: Boolean;
     additionalNeeds?: string;
   }

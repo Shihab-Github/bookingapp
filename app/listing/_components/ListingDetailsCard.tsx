@@ -23,6 +23,13 @@ export default function ListingDetailCard(props: IReservation) {
     host_name,
     host_since,
     description,
+
+    firstName,
+    lastName,
+    startDate,
+    endDate,
+    security_deposit,
+    additionalNeeds,
   } = props;
 
   return (
@@ -38,6 +45,21 @@ export default function ListingDetailCard(props: IReservation) {
           {guests_included} guests · {bedrooms} bedrooms · {beds} bed ·{" "}
           {bathrooms} bathrooms
         </BaseText>
+        {firstName && lastName ? (
+          <BaseText variant="rooms">
+            Booked By - {firstName} {lastName}
+          </BaseText>
+        ) : (
+          ""
+        )}
+        {startDate && endDate ? (
+          <BaseText variant="rooms">
+            From {startDate} to {endDate}
+          </BaseText>
+        ) : (
+          ""
+        )}
+
         <View style={{ flexDirection: "row", gap: 4 }}>
           <Ionicons name="star" size={16} />
           <BaseText variant="ratings">

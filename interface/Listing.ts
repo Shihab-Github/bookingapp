@@ -93,4 +93,5 @@ export interface IListing {
 	reviews_per_month: number;
 	geolocation: IGeolocation;
 	features: string[];
+
 }

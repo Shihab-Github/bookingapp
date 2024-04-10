@@ -1,14 +1,26 @@
 import { IReservation } from "@/interface/Reservation";
 import BaseText from "@/ui/BaseText";
 import { Ionicons } from "@expo/vector-icons";
+import dayjs from "dayjs";
 import { router } from "expo-router";
 import { Pressable, View, StyleSheet, Image, Text } from "react-native";
 
 export default function ReservationItem(props: IReservation) {
-  const { id, name, photo, review_scores_rating, room_type, price } = props;
+  const {
+    id,
+    name,
+    photo,
+    review_scores_rating,
+    room_type,
+    price,
+    firstName,
+    lastName,
+    startDate,
+    endDate,
+  } = props;
 
   const navigate = () => {
-    router.push(`/listing/id`);
+    router.push(`/bookingDetail/${id}`);
   };
 
   return (
@@ -30,7 +42,14 @@ export default function ReservationItem(props: IReservation) {
             ${price} / <BaseText variant="default">night</BaseText>
           </BaseText>
         </View>
-        <Text>Booked By</Text>
+        <BaseText variant="bold">
+          Booked By: {firstName} {lastName}
+        </BaseText>
+        <View style={{ paddingTop: 8 }}>
+          <BaseText>
+            From {startDate} to {endDate}
+          </BaseText>
+        </View>
       </Pressable>
     </View>
   );

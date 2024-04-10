@@ -36,6 +36,10 @@ export default function Page() {
       room_type={item.room_type}
       price={item.price}
       name={item.name}
+      firstName={item.firstName}
+      lastName={item.lastName}
+      startDate={item.startDate}
+      endDate={item.endDate}
     />
   );
 

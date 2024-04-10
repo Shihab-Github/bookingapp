@@ -1,16 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { useLocalSearchParams } from "expo-router";
-import { View, Text, StyleSheet, Dimensions, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import { getListingById } from "@/data-layer/listings";
 import Animated, { SlideInDown } from "react-native-reanimated";
 import ListinSkeleton from "@/ui/ListingSkeleton";
 import Colors from "@/constants/Colors";
-import { Ionicons } from "@expo/vector-icons";
 import BaseText from "@/ui/BaseText";
 import { router } from "expo-router";
 import ListingDetailCard from "./_components/ListingDetailsCard";
-
-const { width } = Dimensions.get("window");
 
 export default function Page() {
   const { id } = useLocalSearchParams<{ id: string }>();
