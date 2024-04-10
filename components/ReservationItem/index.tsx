@@ -1,14 +1,19 @@
 import { IReservation } from "@/interface/Reservation";
 import BaseText from "@/ui/BaseText";
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import { Pressable, View, StyleSheet, Image, Text } from "react-native";
 
 export default function ReservationItem(props: IReservation) {
   const { id, name, photo, review_scores_rating, room_type, price } = props;
 
+  const navigate = () => {
+    router.push(`/listing/id`);
+  };
+
   return (
     <View style={styles.listing}>
-      <Pressable onPress={() => {}}>
+      <Pressable onPress={navigate}>
         <Image source={{ uri: photo }} style={styles.image} />
         <View style={styles.listingInfo}>
           <BaseText variant="default">{name}</BaseText>
