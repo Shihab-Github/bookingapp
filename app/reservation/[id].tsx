@@ -15,6 +15,7 @@ import PriceDetails from "./_components/PriceDetails";
 import { defaultStyles } from "@/styles";
 import UserInfo from "./_components/UserInfo";
 import Label from "@/ui/Label";
+import dayjs from "dayjs";
 
 export default function Reservation() {
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -24,8 +25,8 @@ export default function Reservation() {
   const [lastName, setLirstName] = useState("");
 
   const [bookingDateRange, setBookingDateRange] = useState<IRange>({
-    startDate: undefined,
-    endDate: undefined,
+    startDate: dayjs(),
+    endDate: dayjs().add(2, "day"),
   });
 
   const { isLoading, data: listing } = useQuery({

@@ -43,7 +43,7 @@ export default function Page() {
       <Animated.ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
         <Animated.Image
           style={styles.image}
-          source={{ uri: listing.xl_picture_url }}
+          source={{ uri: listing.medium_url }}
         />
 
         <View style={styles.infoContainer}>

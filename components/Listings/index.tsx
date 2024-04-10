@@ -1,23 +1,19 @@
-import { useRef } from "react";
-import { View, Text, StyleSheet, FlatList, ListRenderItem } from "react-native";
+import { View, StyleSheet, FlatList, ListRenderItem } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import { getListings } from "@/data-layer/listings";
-import { Listing } from "@/interface/Listing";
+import { IListing } from "@/interface/Listing";
 import ListinSkeleton from "@/ui/ListingSkeleton";
 import ListingItem from "../ListingItem";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-interface Props {
+interface IProps {
   category: string;
 }
 
-export default function Listings({ category }: Props) {
-  const listRef = useRef<FlatList>(null);
-
+export default function Listings({ category }: IProps) {
   const { isLoading, data: listings } = useQuery({
     queryKey: ["listingsData", category],
     queryFn: () => {
-      console.log("selected category: ", category);
       return getListings(category).then((data) => {
         return data;
       });
@@ -26,21 +22,19 @@ export default function Listings({ category }: Props) {
 
   if (isLoading) {
     return (
-      <>
-        <SafeAreaView>
-          <ListinSkeleton />
-        </SafeAreaView>
-      </>
+      <SafeAreaView style={{ flex: 1 }}>
+        <ListinSkeleton />
+      </SafeAreaView>
     );
   }
 
-  const renderItem: ListRenderItem<Listing> = ({ item }) => (
+  const renderItem: ListRenderItem<IListing> = ({ item }) => (
     <ListingItem data={item} />
   );
 
   return (
     <View style={styles.container}>
-      <FlatList data={listings} ref={listRef} renderItem={renderItem} />
+      <FlatList data={listings} renderItem={renderItem} />
     </View>
   );
 }

@@ -10,6 +10,7 @@ import { Ionicons } from "@expo/vector-icons";
 import DateTimePicker, { DateType } from "react-native-ui-datepicker";
 import { IRange } from "@/interface/common";
 import { defaultStyles } from "@/styles";
+import dayjs from "dayjs";
 
 interface IProps {
   sheetRef: React.RefObject<BottomSheetMethods>;
@@ -20,8 +21,8 @@ export default function DatePickerBottomSheet(props: IProps) {
   const { sheetRef, close } = props;
 
   const [range, setRange] = useState<IRange>({
-    startDate: undefined,
-    endDate: undefined,
+    startDate: dayjs(),
+    endDate: dayjs().add(2, "day"),
   });
 
   const snapPoints = useMemo(() => {

@@ -25,8 +25,8 @@ export default function TripInfo(props: IProps) {
               <Text
                 style={[defaultStyles.infoSubHeader, { paddingVertical: 8 }]}
               >
-                {dayjs(startDate).format("MMMM/DD/YYYY")} -{" "}
-                {dayjs(endDate).format("MMMM/DD/YYYY")}
+                {dayjs(startDate).format("MMM-D")} -{" "}
+                {dayjs(endDate).format("MMM-D")}
               </Text>
             ) : (
               <Text
@@ -38,7 +38,7 @@ export default function TripInfo(props: IProps) {
           </View>
           <View>
             <Pressable onPress={onDatePickerOpen}>
-              <Text style={defaultStyles.secondaryBtnText}>Select Date</Text>
+              <Text style={defaultStyles.secondaryBtnText}>Edit</Text>
             </Pressable>
           </View>
         </View>

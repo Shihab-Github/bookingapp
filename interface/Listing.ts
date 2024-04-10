@@ -1,9 +1,9 @@
-export interface Geolocation {
+export interface IGeolocation {
 	lon: number;
 	lat: number;
 }
 
-export interface Listing {
+export interface IListing {
 	id: string;
 	listing_url: string;
 	scrape_id: string;
@@ -91,6 +91,6 @@ export interface Listing {
 	cancellation_policy: string;
 	calculated_host_listings_count: number;
 	reviews_per_month: number;
-	geolocation: Geolocation;
+	geolocation: IGeolocation;
 	features: string[];
 }

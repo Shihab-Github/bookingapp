@@ -10,7 +10,6 @@ export default function Page() {
   const [category, setCategory] = useState("Tiny Homes");
 
   const getListingsByCategory = (category: string) => {
-    console.log("CHANGED: ", category);
     setCategory(category);
     queryClient.invalidateQueries({ queryKey: ["listingsData"] });
   };

@@ -1,10 +1,10 @@
-import { Listing } from "@/interface/Listing";
+import { IListing } from "@/interface/Listing";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import BaseText from "@/ui/BaseText";
 
-export default function ListingItem({ data }: { data: Listing }) {
+export default function ListingItem({ data }: { data: IListing }) {
   const navigate = () => {
     router.push(`/listing/${data.id}`);
   };
