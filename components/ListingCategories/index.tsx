@@ -3,7 +3,14 @@ import Colors from "@/constants/Colors";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { useRef, useState } from "react";
-import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  FlatList,
+  TextInput,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Haptics from "expo-haptics";
 
@@ -30,7 +37,7 @@ export default function ListingCategories({
     <SafeAreaView style={{ backgroundColor: "#fff" }}>
       <View style={styles.container}>
         <View style={styles.actionRow}>
-          <Pressable style={styles.searchBtn}>
+          {/* <Pressable style={styles.searchBtn}>
             <Ionicons name="search" size={24} />
             <View>
               <Text style={{ fontFamily: "lato", color: Colors.dark }}>
@@ -40,7 +47,14 @@ export default function ListingCategories({
                 Anywhere · any week
               </Text>
             </View>
-          </Pressable>
+          </Pressable> */}
+
+          <TextInput
+            autoCapitalize="words"
+            inlineImageLeft="username"
+            placeholder="Search properties by name"
+            style={styles.searchBtn}
+          />
 
           <Pressable style={styles.filterBtn}>
             <Ionicons name="options-outline" size={24} />

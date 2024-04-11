@@ -1,44 +1,37 @@
 import React, { useMemo, useState } from "react";
 import { Text, View, StyleSheet, Pressable } from "react-native";
-import BottomSheet, {
-  BottomSheetView,
-  BottomSheetFooter,
-} from "@gorhom/bottom-sheet";
+import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import Colors from "@/constants/Colors";
 import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
 import { Ionicons } from "@expo/vector-icons";
 import DateTimePicker, { DateType } from "react-native-ui-datepicker";
 import { IRange } from "@/interface/common";
 import { defaultStyles } from "@/styles";
-import dayjs from "dayjs";
 
 interface IProps {
   sheetRef: React.RefObject<BottomSheetMethods>;
   close: (range: IRange) => void;
+  setDateRange: (range: IRange) => void;
+  dateRange: IRange;
 }
 
 export default function DatePickerBottomSheet(props: IProps) {
-  const { sheetRef, close } = props;
-
-  const [range, setRange] = useState<IRange>({
-    startDate: dayjs(),
-    endDate: dayjs().add(2, "day"),
-  });
+  const { sheetRef, close, setDateRange, dateRange } = props;
 
   const snapPoints = useMemo(() => {
     return ["50%", "90%"];
   }, []);
 
   const onChange = (params: any) => {
-    setRange(params);
+    setDateRange(params);
   };
 
   const onClose = () => {
-    close(range);
+    close(dateRange);
   };
 
   const onClear = () => {
-    setRange({
+    setDateRange({
       startDate: undefined,
       endDate: undefined,
     });
@@ -71,8 +64,8 @@ export default function DatePickerBottomSheet(props: IProps) {
         <BottomSheetView style={styles.container}>
           <DateTimePicker
             mode={"range"}
-            startDate={range.startDate}
-            endDate={range.endDate}
+            startDate={dateRange.startDate}
+            endDate={dateRange.endDate}
             displayFullDays
             onChange={onChange}
           />

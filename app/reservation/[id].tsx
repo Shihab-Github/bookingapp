@@ -137,6 +137,8 @@ export default function Reservation() {
       <DatePickerBottomSheet
         sheetRef={bottomSheetRef}
         close={onDatePickerClose}
+        dateRange={bookingDateRange}
+        setDateRange={setBookingDateRange}
       />
     </GestureHandlerRootView>
   );
