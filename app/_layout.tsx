@@ -51,6 +51,26 @@ function RootLayoutNav() {
     <ThemeProvider value={DefaultTheme}>
       <QueryClientProvider client={queryClient}>
         <Stack>
+          <Stack.Screen
+            name="(modals)/filters"
+            options={{
+              // Set the presentation mode to modal for our modal route.
+              presentation: "modal",
+              animation: "slide_from_bottom",
+
+              title: "Apply Filters",
+            }}
+          />
+          <Stack.Screen
+            name="(modals)/search"
+            options={{
+              // Set the presentation mode to modal for our modal route.
+              presentation: "modal",
+              animation: "slide_from_bottom",
+
+              title: "Search Apartments",
+            }}
+          />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen
             name="listing/[id]"

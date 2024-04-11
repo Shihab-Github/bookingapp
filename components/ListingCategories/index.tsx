@@ -1,16 +1,9 @@
 import { categories } from "@/constants/Categories";
 import Colors from "@/constants/Colors";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { useRef, useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  FlatList,
-  TextInput,
-} from "react-native";
+import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Haptics from "expo-haptics";
 
@@ -23,6 +16,10 @@ export default function ListingCategories({
 }: ListingCategoryProps) {
   const scrollRef = useRef<FlatList>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const navigate = () => {
+    router.push("/(modals)/search");
+  };
 
   const selectCategory = (index: number) => {
     setActiveIndex(index);
@@ -37,7 +34,7 @@ export default function ListingCategories({
     <SafeAreaView style={{ backgroundColor: "#fff" }}>
       <View style={styles.container}>
         <View style={styles.actionRow}>
-          {/* <Pressable style={styles.searchBtn}>
+          <Pressable style={styles.searchBtn} onPress={navigate}>
             <Ionicons name="search" size={24} />
             <View>
               <Text style={{ fontFamily: "lato", color: Colors.dark }}>
@@ -47,18 +44,13 @@ export default function ListingCategories({
                 Anywhere · any week
               </Text>
             </View>
-          </Pressable> */}
-
-          <TextInput
-            autoCapitalize="words"
-            inlineImageLeft="username"
-            placeholder="Search properties by name"
-            style={styles.searchBtn}
-          />
-
-          <Pressable style={styles.filterBtn}>
-            <Ionicons name="options-outline" size={24} />
           </Pressable>
+
+          <Link href="/(modals)/filters" asChild>
+            <Pressable style={styles.filterBtn}>
+              <Ionicons name="options-outline" size={24} />
+            </Pressable>
+          </Link>
         </View>
 
         <FlatList

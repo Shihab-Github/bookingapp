@@ -27,8 +27,8 @@ export default function Reservation() {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const { id } = useLocalSearchParams<{ id: string }>();
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLirstName] = useState("");
+  const [firstName, setFirstName] = useState("Raza Shihab");
+  const [lastName, setLirstName] = useState("Mahbub");
 
   const [bookingDateRange, setBookingDateRange] = useState<IRange>({
     startDate: dayjs(),

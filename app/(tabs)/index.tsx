@@ -2,12 +2,17 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import ListingCategories from "@/components/ListingCategories";
 import Listings from "@/components/Listings";
-import { Stack } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import { View } from "react-native";
 
 export default function Page() {
   const queryClient = useQueryClient();
   const [category, setCategory] = useState("Tiny Homes");
+
+  const { sortBy, searchStr } = useLocalSearchParams<{
+    sortBy: string;
+    searchStr: string;
+  }>();
 
   const getListingsByCategory = (category: string) => {
     setCategory(category);
@@ -23,7 +28,8 @@ export default function Page() {
           ),
         }}
       />
-      <Listings category={category} />
+
+      <Listings category={category} sortBy={sortBy} searchStr={searchStr} />
     </View>
   );
 }

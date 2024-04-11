@@ -1,20 +1,29 @@
-import { View, StyleSheet, FlatList, ListRenderItem } from "react-native";
+import { View, StyleSheet, FlatList, ListRenderItem, Text } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import { getListings } from "@/data-layer/listings";
 import { IListing } from "@/interface/Listing";
 import ListinSkeleton from "@/ui/ListingSkeleton";
 import ListingItem from "../ListingItem";
 import { SafeAreaView } from "react-native-safe-area-context";
+import BaseText from "@/ui/BaseText";
 
 interface IProps {
   category: string;
+  sortBy: string | undefined;
+  searchStr: string | undefined;
 }
 
-export default function Listings({ category }: IProps) {
+const keyValue: any = {
+  price: "Price",
+  startDate: "Check-in Date (Asc)",
+  endDate: "Check-in Date (Desc)",
+};
+
+export default function Listings({ category, sortBy, searchStr }: IProps) {
   const { isLoading, data: listings } = useQuery({
-    queryKey: ["listingsData", category],
+    queryKey: ["listingsData", category, sortBy, searchStr],
     queryFn: () => {
-      return getListings(category).then((data) => {
+      return getListings(category, sortBy, searchStr).then((data) => {
         return data;
       });
     },
@@ -33,9 +42,27 @@ export default function Listings({ category }: IProps) {
   );
 
   return (
-    <View style={styles.container}>
-      <FlatList data={listings} renderItem={renderItem} />
-    </View>
+    <>
+      {sortBy ? (
+        <View
+          style={{
+            paddingVertical: 8,
+            paddingHorizontal: 16,
+            backgroundColor: "#fff",
+          }}
+        >
+          <Text>
+            Sorted By: <BaseText variant="bold">{keyValue[sortBy]}</BaseText>{" "}
+          </Text>
+        </View>
+      ) : (
+        ""
+      )}
+
+      <View style={styles.container}>
+        <FlatList data={listings} renderItem={renderItem} />
+      </View>
+    </>
   );
 }
 

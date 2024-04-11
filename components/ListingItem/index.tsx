@@ -30,6 +30,9 @@ export default function ListingItem({ data }: { data: IListing }) {
             ${data.price} / <BaseText variant="default">night</BaseText>
           </BaseText>
         </View>
+        <BaseText variant="default">
+          Available from {data.available_from} - {data.available_to}
+        </BaseText>
       </Pressable>
     </View>
   );
