@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { View, Text, Pressable } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { getListingById } from "@/data-layer/listings";
@@ -16,8 +16,11 @@ import { defaultStyles } from "@/styles";
 import UserInfo from "./_components/UserInfo";
 import Label from "@/ui/Label";
 import dayjs from "dayjs";
+import { IReservation } from "@/interface/Reservation";
+import { createBooking } from "@/data-layer/reservations";
 
 export default function Reservation() {
+  const queryClient = useQueryClient();
   const bottomSheetRef = useRef<BottomSheet>(null);
   const { id } = useLocalSearchParams<{ id: string }>();
 
@@ -27,6 +30,21 @@ export default function Reservation() {
   const [bookingDateRange, setBookingDateRange] = useState<IRange>({
     startDate: dayjs(),
     endDate: dayjs().add(2, "day"),
+  });
+
+  const newBookingMutation = useMutation({
+    mutationFn: (data: IReservation) => {
+      return createBooking(data).then(() => {});
+    },
+    onSuccess: () => {
+      console.log("booking create hoise");
+      // toast.success("Booking has been created");
+      queryClient.invalidateQueries({ queryKey: ["documentsData"] });
+    },
+    onError: (error, variables) => {
+      console.log("error mama", error);
+      // console.log("error mama", variables);
+    },
   });
 
   const { isLoading, data: listing } = useQuery({
@@ -45,6 +63,23 @@ export default function Reservation() {
   const onDatePickerClose = (dateRange: IRange) => {
     bottomSheetRef.current?.close();
     setBookingDateRange(dateRange);
+  };
+
+  const confirmBooking = () => {
+    newBookingMutation.mutate({
+      id: "0",
+      photo: listing?.medium_url ?? "",
+      name: listing?.name ?? "",
+      review_scores_rating: listing?.review_scores_rating ?? 50,
+      room_type: listing?.room_type ?? "Entire home/apt",
+      price: listing?.price ?? 698,
+      firstName,
+      lastName,
+      startDate: dayjs(bookingDateRange.startDate).format("MMM-DD-YYYY"),
+      endDate: dayjs(bookingDateRange.endDate).format("MMM-DD-YYYY"),
+      security_deposit: true,
+      additionalNeeds: "Laundry",
+    });
   };
 
   if (isLoading || !listing) {
@@ -90,7 +125,7 @@ export default function Reservation() {
             for damage
           </Label>
 
-          <Pressable style={defaultStyles.primaryBtn}>
+          <Pressable style={defaultStyles.primaryBtn} onPress={confirmBooking}>
             <Text style={defaultStyles.primaryBtnText}>Confirm and Pay</Text>
           </Pressable>
         </View>
