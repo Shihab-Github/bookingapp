@@ -12,7 +12,7 @@ export default function BookingDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
 
   const { isLoading, data: reservation } = useQuery({
-    queryKey: ["listing", id],
+    queryKey: ["bookingDetail", id],
     queryFn: () => {
       return getReservationById(id).then((data) => {
         return data;

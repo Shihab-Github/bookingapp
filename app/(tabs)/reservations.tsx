@@ -3,15 +3,11 @@ import { getReservations } from "@/data-layer/reservations";
 import { IReservation } from "@/interface/Reservation";
 import ListinSkeleton from "@/ui/ListingSkeleton";
 import { useQuery } from "@tanstack/react-query";
-import { Text, View, StyleSheet, FlatList, ListRenderItem } from "react-native";
+import { View, StyleSheet, FlatList, ListRenderItem } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Page() {
-  const {
-    isLoading,
-    data: reservations,
-    isError,
-  } = useQuery({
+  const { isLoading, data: reservations } = useQuery({
     queryKey: ["bookings"],
     queryFn: () => {
       return getReservations().then((data) => {

@@ -3,15 +3,7 @@ import Colors from "@/constants/Colors";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { useRef, useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  FlatList,
-  Image,
-  PressableProps,
-} from "react-native";
+import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Haptics from "expo-haptics";
 
@@ -38,19 +30,17 @@ export default function ListingCategories({
     <SafeAreaView style={{ backgroundColor: "#fff" }}>
       <View style={styles.container}>
         <View style={styles.actionRow}>
-          <Link href={"/(modals)/booking"} asChild>
-            <Pressable style={styles.searchBtn}>
-              <Ionicons name="search" size={24} />
-              <View>
-                <Text style={{ fontFamily: "lato", color: Colors.dark }}>
-                  Where to?
-                </Text>
-                <Text style={{ fontFamily: "lato", color: Colors.grey }}>
-                  Anywhere · any week
-                </Text>
-              </View>
-            </Pressable>
-          </Link>
+          <Pressable style={styles.searchBtn}>
+            <Ionicons name="search" size={24} />
+            <View>
+              <Text style={{ fontFamily: "lato", color: Colors.dark }}>
+                Where to?
+              </Text>
+              <Text style={{ fontFamily: "lato", color: Colors.grey }}>
+                Anywhere · any week
+              </Text>
+            </View>
+          </Pressable>
 
           <Pressable style={styles.filterBtn}>
             <Ionicons name="options-outline" size={24} />

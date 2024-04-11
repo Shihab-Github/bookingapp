@@ -18,6 +18,9 @@ import Label from "@/ui/Label";
 import dayjs from "dayjs";
 import { IReservation } from "@/interface/Reservation";
 import { createBooking } from "@/data-layer/reservations";
+import * as Haptics from "expo-haptics";
+import Toast from "react-native-simple-toast";
+import { router } from "expo-router";
 
 export default function Reservation() {
   const queryClient = useQueryClient();
@@ -32,27 +35,26 @@ export default function Reservation() {
     endDate: dayjs().add(2, "day"),
   });
 
-  const newBookingMutation = useMutation({
-    mutationFn: (data: IReservation) => {
-      return createBooking(data).then(() => {});
-    },
-    onSuccess: () => {
-      console.log("booking create hoise");
-      // toast.success("Booking has been created");
-      queryClient.invalidateQueries({ queryKey: ["documentsData"] });
-    },
-    onError: (error, variables) => {
-      console.log("error mama", error);
-      // console.log("error mama", variables);
-    },
-  });
-
   const { isLoading, data: listing } = useQuery({
     queryKey: ["listing", id],
     queryFn: () => {
       return getListingById(id).then((data) => {
         return data;
       });
+    },
+  });
+
+  const newBookingMutation = useMutation({
+    mutationFn: (data: IReservation) => {
+      return createBooking(data).then(() => {});
+    },
+    onSuccess: () => {
+      Toast.show("Booking has been created", Toast.LONG);
+      queryClient.invalidateQueries({ queryKey: ["bookings"] });
+      router.replace("/(tabs)/reservations");
+    },
+    onError: () => {
+      Toast.show("Failed to create booking", Toast.LONG);
     },
   });
 
@@ -66,6 +68,8 @@ export default function Reservation() {
   };
 
   const confirmBooking = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+
     newBookingMutation.mutate({
       id: "0",
       photo: listing?.medium_url ?? "",
