@@ -67,24 +67,33 @@ This app can be improved in a greater way to increase user experience and add mo
 Hope you like it.  
 
 ## App screens
+
+### Booking Screen
 ![WhatsApp Image 2024-04-12 at 5 36 35 PM](https://github.com/Shihab-Github/bookingapp/assets/22868908/a3434c7d-aa8a-4143-89bf-197f137509cd)
 
+### Search Screen
 ![WhatsApp Image 2024-04-12 at 5 36 35 PM (1)](https://github.com/Shihab-Github/bookingapp/assets/22868908/8dc16764-ab8d-4aa2-aef7-bbc69abf2e9d)
 
+### Filter Screen
 ![WhatsApp Image 2024-04-12 at 5 36 35 PM (2)](https://github.com/Shihab-Github/bookingapp/assets/22868908/b49d3624-838e-4850-b04d-4434d66d21bd)
 
+### Booking Detail Screen
 ![WhatsApp Image 2024-04-12 at 5 36 35 PM (3)](https://github.com/Shihab-Github/bookingapp/assets/22868908/6a1ed354-fc4a-49ec-a3cb-ab5f89c6bd89)
 
+### Create Booking Screen
 ![WhatsApp Image 2024-04-12 at 5 36 36 PM](https://github.com/Shihab-Github/bookingapp/assets/22868908/d07d2274-83f0-4157-86fc-0a5d1f231185)
-
 ![WhatsApp Image 2024-04-12 at 5 36 36 PM (1)](https://github.com/Shihab-Github/bookingapp/assets/22868908/0f79ae09-7360-49ce-b32c-030081f41a77)
 
+### My Reservations Screen
 ![WhatsApp Image 2024-04-12 at 5 36 36 PM (2)](https://github.com/Shihab-Github/bookingapp/assets/22868908/1d33b6ba-bffe-4c98-abd0-d8c5e85777e3)
 
+### Date picker bottom sheet
 ![WhatsApp Image 2024-04-12 at 5 36 37 PM](https://github.com/Shihab-Github/bookingapp/assets/22868908/e00eb1e8-cec1-41ae-a76e-5f5f3b452eb1)
 
+### Cancel Reservation Screen
 ![WhatsApp Image 2024-04-12 at 5 36 37 PM (2)](https://github.com/Shihab-Github/bookingapp/assets/22868908/abf929dd-d4d3-4d96-97b7-290df131f04b)
 
+### Profile Screen
 ![WhatsApp Image 2024-04-12 at 5 36 37 PM (3)](https://github.com/Shihab-Github/bookingapp/assets/22868908/01d5c2a2-c9d5-4852-a9dd-47e8f44281dd)
 
 
