@@ -1,15 +1,30 @@
 import { View, StyleSheet, Pressable, Text } from "react-native";
-import { useLocalSearchParams } from "expo-router";
-import { useQuery } from "@tanstack/react-query";
-import { getReservationById } from "@/data-layer/reservations";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { router, useLocalSearchParams } from "expo-router";
+import { getReservationById, deleteBooking } from "@/data-layer/reservations";
 import ListinSkeleton from "@/ui/ListingSkeleton";
 import Colors from "@/constants/Colors";
 import Animated, { SlideInDown } from "react-native-reanimated";
 import ListingDetailCard from "../listing/_components/ListingDetailsCard";
 import BaseText from "@/ui/BaseText";
+import Toast from "react-native-simple-toast";
+import { Alert } from "react-native";
+import { defaultStyles } from "@/styles";
 
 export default function BookingDetail() {
+  const queryClient = useQueryClient();
   const { id } = useLocalSearchParams<{ id: string }>();
+
+  const cancelBookingMutation = useMutation({
+    mutationFn: (id: string) => {
+      return deleteBooking(id).then(() => {});
+    },
+    onSuccess: () => {
+      Toast.show("Booking has been cancelled", Toast.LONG);
+      queryClient.invalidateQueries({ queryKey: ["bookings"] });
+      router.replace("/(tabs)/reservations");
+    },
+  });
 
   const { isLoading, data: reservation } = useQuery({
     queryKey: ["bookingDetail", id],
@@ -19,6 +34,21 @@ export default function BookingDetail() {
       });
     },
   });
+
+  const showPrompt = () => {
+    Alert.alert(
+      "Cancel Reservation",
+      "Are you sure you want to cancel your reservation?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        { text: "Ok", onPress: () => cancelBookingMutation.mutate(id) },
+      ]
+    );
+  };
 
   if (isLoading || !reservation) {
     return <ListinSkeleton />;
@@ -67,7 +97,10 @@ export default function BookingDetail() {
             </BaseText>
           </View>
 
-          <View>
+          <View style={{ flexDirection: "row", gap: 8, alignItems: "center" }}>
+            <Pressable style={defaultStyles.deleteBtn} onPress={showPrompt}>
+              <Text style={defaultStyles.deleteBtnText}>Delete</Text>
+            </Pressable>
             <Pressable style={styles.reserveBtn} onPress={() => {}}>
               <Text style={styles.reserveBtnText}>Edit</Text>
             </Pressable>

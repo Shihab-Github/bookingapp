@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { Children, useMemo, useState } from "react";
 import { Text, View, StyleSheet, Pressable } from "react-native";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import Colors from "@/constants/Colors";
@@ -13,10 +13,11 @@ interface IProps {
   close: (range: IRange) => void;
   setDateRange: (range: IRange) => void;
   dateRange: IRange;
+  children?: React.ReactNode;
 }
 
 export default function DatePickerBottomSheet(props: IProps) {
-  const { sheetRef, close, setDateRange, dateRange } = props;
+  const { sheetRef, close, setDateRange, dateRange, children } = props;
 
   const snapPoints = useMemo(() => {
     return ["50%", "90%"];
@@ -85,6 +86,7 @@ export default function DatePickerBottomSheet(props: IProps) {
             </Pressable>
           </View>
         </BottomSheetView>
+        {children}
       </>
     </BottomSheet>
   );

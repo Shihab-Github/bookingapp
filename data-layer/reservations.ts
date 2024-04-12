@@ -50,3 +50,15 @@ export const createBooking = (data: IReservation) => {
       });
   });
 };
+
+export const deleteBooking = (id: string) => {
+  return new Promise((resolve, reject) => {
+    let url = GET_RESERVATIONS_API + "/" + id;
+    axios
+      .delete(url)
+      .then((response) => resolve(response.data))
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
