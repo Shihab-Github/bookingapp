@@ -6,12 +6,10 @@ type Variant = keyof typeof styles;
 interface Props {
   variant?: Variant;
   children: React.ReactNode;
-  fontSize?: number;
-  fontWeight?: any;
 }
 
 export default function BaseText(props: Props) {
-  const { variant = "default", fontSize, fontWeight, children } = props;
+  const { variant = "default", children } = props;
 
   const textStyle = {
     ...styles[variant],
