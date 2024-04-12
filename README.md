@@ -60,12 +60,41 @@ Let me share a brief overview on the project struture
     - **reservation.ts**: This file is containing all the necessary methods regarding reservations made by an user. The methods get the data from backend and send data to backend are written in this file
     - **Interface**: It contains the interfaces
     - **ui**: This directory has the atomic level UI's only which is shared in many places in the app
-
-
+ 
 ## Conclusion
 This app can be improved in a greater way to increase user experience and add more features. However, for this test I have tried my best to add the primary level features and make it bug free. 
 
 Hope you like it.  
+
+## App screens
+![WhatsApp Image 2024-04-12 at 5 36 35 PM](https://github.com/Shihab-Github/bookingapp/assets/22868908/a3434c7d-aa8a-4143-89bf-197f137509cd)
+
+![WhatsApp Image 2024-04-12 at 5 36 35 PM (1)](https://github.com/Shihab-Github/bookingapp/assets/22868908/8dc16764-ab8d-4aa2-aef7-bbc69abf2e9d)
+
+![WhatsApp Image 2024-04-12 at 5 36 35 PM (2)](https://github.com/Shihab-Github/bookingapp/assets/22868908/b49d3624-838e-4850-b04d-4434d66d21bd)
+
+![WhatsApp Image 2024-04-12 at 5 36 35 PM (3)](https://github.com/Shihab-Github/bookingapp/assets/22868908/6a1ed354-fc4a-49ec-a3cb-ab5f89c6bd89)
+
+![WhatsApp Image 2024-04-12 at 5 36 36 PM](https://github.com/Shihab-Github/bookingapp/assets/22868908/d07d2274-83f0-4157-86fc-0a5d1f231185)
+
+![WhatsApp Image 2024-04-12 at 5 36 36 PM (1)](https://github.com/Shihab-Github/bookingapp/assets/22868908/0f79ae09-7360-49ce-b32c-030081f41a77)
+
+![WhatsApp Image 2024-04-12 at 5 36 36 PM (2)](https://github.com/Shihab-Github/bookingapp/assets/22868908/1d33b6ba-bffe-4c98-abd0-d8c5e85777e3)
+
+![WhatsApp Image 2024-04-12 at 5 36 37 PM](https://github.com/Shihab-Github/bookingapp/assets/22868908/e00eb1e8-cec1-41ae-a76e-5f5f3b452eb1)
+
+![WhatsApp Image 2024-04-12 at 5 36 37 PM (2)](https://github.com/Shihab-Github/bookingapp/assets/22868908/abf929dd-d4d3-4d96-97b7-290df131f04b)
+
+![WhatsApp Image 2024-04-12 at 5 36 37 PM (3)](https://github.com/Shihab-Github/bookingapp/assets/22868908/01d5c2a2-c9d5-4852-a9dd-47e8f44281dd)
+
+
+
+
+
+
+
+
+
 
 
 
