@@ -47,7 +47,25 @@ backend application in the same wifi network otherwise the api calls won't work.
 ## Documentation
 As this is a airbnb clone app, I have taken a json file from <a href="https://public.opendatasoft.com/explore/dataset/air-bnb-listings/table/?disjunctive.neighbourhood&disjunctive.column_10&disjunctive.city">here</a>. The data in the **bookings** has been populated from json data. And the user related data are coming from backend server. For instance, in the **Reservations** tab, the listings are coming from the backend application. That's why we need the backend application up and running. 
 
+## Project Structure
+Let me share a brief overview on the project struture
 
+- The routes are inside the app folder
+- In asset folder, I have put a custom font file
+- In components folder, I have put the molecules that supports the main route/screen components
+- In the constants folder, I have put some constant data, color theme and airbnb json data
+- Inside data-layer, there are 3 files
+    - **API.ts**: This is where the api routes are kept.
+    - **listing.ts**: This file is housing the functions that is required to read the data from the airbnb json file. 
+    - **reservation.ts**: This file is containing all the necessary methods regarding reservations made by an user. The methods get the data from backend and send data to backend are written in this file
+    - **Interface**: It contains the interfaces
+    - **ui**: This directory has the atomic level UI's only which is shared in many places in the app
+
+
+## Conclusion
+This app can be improved in a greater way to increase user experience and add more features. However, for this test I have tried my best to add the primary level features and make it bug free. 
+
+Hope you like it.  
 
 
 
