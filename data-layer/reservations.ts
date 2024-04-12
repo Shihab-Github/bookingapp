@@ -62,3 +62,15 @@ export const deleteBooking = (id: string) => {
       });
   });
 };
+
+export const updateBooking = (id: string, data: any) => {
+  return new Promise((resolve, reject) => {
+    let url = GET_RESERVATIONS_API + "/" + id;
+    axios
+      .patch(url, data)
+      .then((response) => resolve(response.data))
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};

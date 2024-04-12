@@ -11,7 +11,9 @@ export const defaultStyles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
   },
-
+  defaultContainer: {
+    flex: 1,
+  },
   deleteBtn: {
     backgroundColor: "#fff",
     height: 50,

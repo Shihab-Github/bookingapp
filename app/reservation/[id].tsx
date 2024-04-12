@@ -83,6 +83,7 @@ export default function Reservation() {
       endDate: dayjs(bookingDateRange.endDate).format("MMM-DD-YYYY"),
       security_deposit: true,
       additionalNeeds: "Laundry",
+      smart_location: listing?.smart_location,
     });
   };
 
